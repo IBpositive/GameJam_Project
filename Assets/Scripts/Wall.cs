@@ -6,7 +6,7 @@ using UnityEngine;
 public class Wall : MonoBehaviour
 {
     public Sprite dmgSprite;
-    public int hp = 4;
+    public int hp = 2;
 
     private SpriteRenderer spriteRenderer;
 
@@ -28,17 +28,5 @@ public class Wall : MonoBehaviour
             // lower case gameObject is kind of like this
             gameObject.SetActive(false);
         }
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

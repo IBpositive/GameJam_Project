@@ -105,7 +105,8 @@ public class Player : MovingObject
     private void Restart()
     {
         // reloads itself
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex, LoadSceneMode.Single);
+        //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     public void LoseFood(int loss)

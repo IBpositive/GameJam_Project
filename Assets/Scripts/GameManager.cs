@@ -2,7 +2,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using Scene = UnityEditor.SearchService.Scene;
 
 public class GameManager : MonoBehaviour
 {
@@ -19,7 +21,7 @@ public class GameManager : MonoBehaviour
     private int level = 1;
     private List<Enemy> enemies;
     private bool enemiesMoving;
-    private bool doingSetup;
+    private bool doingSetup = true;
     
 
     private void Awake()
@@ -39,11 +41,25 @@ public class GameManager : MonoBehaviour
         InitGame();
     }
 
-    private void OnLevelWasLoaded(int index)
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
+    static public void CallbackInitialization()
     {
-        level++;
-        InitGame();
+        SceneManager.sceneLoaded += OnSceneLoaded;
     }
+
+    private static void OnSceneLoaded(UnityEngine.SceneManagement.Scene arg0, LoadSceneMode arg1)
+    {
+        instance.level++;
+        instance.InitGame();
+    }
+
+
+    // comment out later
+    //private void OnLevelWasLoaded(int index)
+    //{
+    //   level++;
+    //    InitGame();
+    //}
     
     private void Update()
     {
