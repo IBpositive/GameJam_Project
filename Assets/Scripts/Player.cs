@@ -22,15 +22,12 @@ public class Player : MovingObject
     public AudioClip drinkSound2;
     public AudioClip gameOverSound;
     
-    
     private Animator animator;
     private int food;
     
-    
-    // Start is called before the first frame update
     protected override void Start()
     {
-        animator = GetComponent<Animator>();
+        //animator = GetComponent<Animator>();
         // update food upon start
         food = GameManager.instance.playerFoodPoints;
 
@@ -39,7 +36,6 @@ public class Player : MovingObject
         base.Start();
     }
 
-    
     private void OnDisable()
     {
         // update/store value of food as levels are changed
@@ -54,6 +50,7 @@ public class Player : MovingObject
             return;
         }
 
+        /*
         int horizontal = 0;
         int vertical = 0;
 
@@ -69,6 +66,7 @@ public class Player : MovingObject
         {
             AttemptMove<Wall>(horizontal, vertical);
         }
+        */
     }
 
     // when a player runs into something

@@ -51,6 +51,7 @@ public class GameManager : MonoBehaviour
     {
         instance.level++;
         instance.InitGame();
+        AstarPath.active.Scan();
     }
 
 

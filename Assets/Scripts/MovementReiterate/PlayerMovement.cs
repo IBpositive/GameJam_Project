@@ -9,6 +9,11 @@ public class PlayerMovement : MonoBehaviour
 
     public Rigidbody2D rb;
     public Animator animator;
+    public Transform[] firePoints;
+    private int facingDirection;
+    
+    private Shooting shooting;
+    
     
     public float restartLevelDelay = 1f;
 
@@ -18,10 +23,12 @@ public class PlayerMovement : MonoBehaviour
     private bool isLeft;
     private static readonly int Vertical = Animator.StringToHash("Vertical");
     private static readonly int Horizontal = Animator.StringToHash("Horizontal");
+    
 
     private void Awake()
     {
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
+        shooting = gameObject.GetComponent<Shooting>();
         isLeft = false;
     }
 
@@ -53,10 +60,25 @@ public class PlayerMovement : MonoBehaviour
                 isLeft = false;
             }
         }
+
+        if (animator.GetFloat("LastMoveH") == 1)
+        {
+            facingDirection = 2;
+        } else if (animator.GetFloat("LastMoveH") == -1)
+        {
+            facingDirection = 4;
+        } else if (animator.GetFloat("LastMoveY") == 1)
+        {
+            facingDirection = 1;
+        } else if (animator.GetFloat("LastMoveY") == -1)
+        {
+            facingDirection = 3;
+        }
         
-        if (Input.GetKeyDown(KeyCode.Space) && movement.sqrMagnitude == 0)
+        if (Input.GetButtonDown("Fire1") && movement.sqrMagnitude == 0)
         {
             animator.SetTrigger("Attack");
+            shooting.Shoot(firePoints[facingDirection - 1]);
         }
         spriteRenderer.flipX = isLeft;
     }
